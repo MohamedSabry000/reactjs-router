@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { fetchAllusers } from "../../api/users";
-// import UsersTable from '../table/UsersTable';
-const Home = () => {
-  const navigate = useNavigate();
 
+const Home = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // const fetchData = async () => {
         console.log("hello");
        fetchAllusers()
         .then(({data}) => {
@@ -20,8 +17,6 @@ const Home = () => {
         .catch((err) => {
           setUsers([]);
         });
-    // };
-    // fetchData();
   }, [setUsers]);
 
   return (<Container>
@@ -37,7 +32,7 @@ const Home = () => {
                         <Card.Body>
                             <Card.Title>{user.name}</Card.Title>
                             <Card.Text>{user.email}</Card.Text>
-                            <Link style={{ margin: "3px" }} variant="primary" to={`/profile/${user.id}`}>view</Link>
+                            <Link className="btn btn-primary" style={{ margin: "3px" }} to={`/profile/${user.id}`}>view</Link>
                             <Button style={{ margin: "3px" }} variant="warning">edit</Button>
                             <Button style={{ margin: "3px" }} variant="danger">remove</Button>
                         </Card.Body>
